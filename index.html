@@ -1,863 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Price Mitra</title>
 
 <style>
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#f4f7fb;
-    color:#111827;
-}
-
-header{
-    height:70px;
-    padding:0 25px;
-    background:white;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    box-shadow:0 3px 15px #00000012;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:900;
-}
-
-.logo span{
-    color:#2563eb;
-}
-
-nav a{
-    margin-left:18px;
-    text-decoration:none;
-    color:#374151;
-    font-size:14px;
+  font-family:Arial,sans-serif;
+  background:#f5f6fa;
+  color:#111827;
 }
 
 .hero{
-    min-height:600px;
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    background:linear-gradient(135deg,#dbeafe,#ffffff 45%,#dcfce7);
-}
-
-.visual{
-    position:absolute;
-    background:white;
-    width:90px;
-    height:90px;
-    border-radius:22px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:42px;
-    box-shadow:0 15px 35px #00000012;
-    opacity:.65;
-}
-
-.v1{top:12%;left:6%;transform:rotate(-12deg);}
-.v2{top:18%;right:7%;transform:rotate(10deg);}
-.v3{bottom:16%;left:9%;transform:rotate(8deg);}
-.v4{bottom:12%;right:8%;transform:rotate(-10deg);}
-.v5{top:45%;left:2%;transform:rotate(15deg);}
-.v6{top:43%;right:2%;transform:rotate(-15deg);}
-
-.hero-content{
-    position:relative;
-    z-index:2;
-    width:90%;
-    max-width:850px;
-}
-
-.small-text{
-    display:inline-block;
-    background:white;
-    color:#2563eb;
-    padding:9px 16px;
-    border-radius:30px;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:22px;
+  background:linear-gradient(135deg,#6d55e8,#9b43b5);
+  padding:50px 25px 70px;
+  border-radius:0 0 45px 45px;
+  text-align:center;
 }
 
 .hero h1{
-    font-size:58px;
-    line-height:1.05;
-    margin-bottom:20px;
-}
-
-.hero h1 span{
-    color:#2563eb;
+  color:white;
+  font-size:42px;
+  margin-bottom:12px;
 }
 
 .hero p{
-    color:#64748b;
-    font-size:18px;
-    margin-bottom:35px;
+  color:white;
+  font-size:20px;
+  margin-bottom:35px;
 }
 
 .search-box{
-    width:100%;
-    max-width:720px;
-    margin:auto;
-    background:#ffffffdd;
-    padding:8px;
-    border-radius:20px;
-    display:flex;
-    box-shadow:0 20px 50px #00000018;
+  max-width:650px;
+  margin:auto;
+  display:flex;
+  background:white;
+  padding:10px;
+  border-radius:30px;
 }
 
 .search-box input{
-    flex:1;
-    border:none;
-    outline:none;
-    background:transparent;
-    padding:17px;
-    font-size:16px;
+  flex:1;
+  border:0;
+  outline:0;
+  padding:15px;
+  font-size:20px;
 }
 
 .search-box button{
-    border:none;
-    background:#2563eb;
-    color:white;
-    padding:0 25px;
-    border-radius:14px;
-    font-weight:bold;
-    font-size:15px;
-    cursor:pointer;
+  border:0;
+  background:#6d55e8;
+  color:white;
+  padding:0 30px;
+  border-radius:20px;
+  font-size:18px;
+  font-weight:bold;
 }
 
-.upload-area{
-    max-width:720px;
-    margin:15px auto 0;
-    display:flex;
-    gap:10px;
-    justify-content:center;
+.container{
+  max-width:900px;
+  margin:55px auto;
+  padding:0 20px;
 }
 
-.upload-btn,
-.link-btn{
-    background:white;
-    border:1px solid #e5e7eb;
-    padding:12px 18px;
-    border-radius:12px;
-    color:#374151;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:13px;
-}
-
-.upload-btn:hover,
-.link-btn:hover{
-    border-color:#2563eb;
-    color:#2563eb;
-}
-
-#photoInput{
-    display:none;
-}
-
-.photo-name{
-    display:none;
-    margin-top:10px;
-    color:#2563eb;
-    font-size:13px;
-    font-weight:bold;
-}
-
-.result-section{
-    display:none;
-    padding:60px 20px;
-    max-width:950px;
-    margin:auto;
-}
-
-.result-section.show{
-    display:block;
-}
-
-.result-title{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.result-title h2{
-    font-size:30px;
-}
-
-.result-title p{
-    color:#64748b;
-    margin-top:8px;
-}
-
-.product-card{
-    background:white;
-    border-radius:24px;
-    padding:25px;
-    box-shadow:0 10px 35px #00000010;
-}
-
-.product-info{
-    display:flex;
-    align-items:center;
-    gap:20px;
-    margin-bottom:28px;
-}
-
-.product-image{
-    width:100px;
-    height:100px;
-    border-radius:20px;
-    background:#eff6ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:55px;
-    overflow:hidden;
-}
-
-.product-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.product-info h3{
-    font-size:24px;
-    margin-bottom:7px;
-}
-
-.product-info p{
-    color:#64748b;
-}
-
-.store{
-    display:grid;
-    grid-template-columns:1fr auto auto;
-    align-items:center;
-    gap:18px;
-    padding:18px;
-    margin-top:12px;
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-}
-
-.store-name{
-    font-weight:bold;
-}
-
-.store-price{
-    font-size:20px;
-    font-weight:900;
-}
-
-.deal{
-    background:#111827;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-.deal:hover{
-    background:#2563eb;
-}
-
-.best{
-    border:2px solid #10b981;
-    background:#ecfdf5;
-}
-
-.best-label{
-    display:inline-block;
-    background:#10b981;
-    color:white;
-    padding:5px 8px;
-    border-radius:20px;
-    font-size:10px;
-    margin-left:5px;
-}
-
-.save-box{
-    margin-top:20px;
-    padding:18px;
-    background:#eff6ff;
-    border-radius:15px;
-    text-align:center;
-}
-
-.save-box strong{
-    color:#2563eb;
+h2{
+  font-size:36px;
+  margin-bottom:30px;
 }
 
 .categories{
-    padding:70px 20px;
-    max-width:1100px;
-    margin:auto;
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  margin-bottom:70px;
 }
 
-.categories h2,
-.deals-section h2{
-    text-align:center;
-    font-size:32px;
-    margin-bottom:12px;
+.category{
+  background:white;
+  padding:25px 45px;
+  border-radius:25px;
+  white-space:nowrap;
+  font-size:22px;
+  box-shadow:0 8px 25px rgba(0,0,0,.06);
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+.result{
+  background:white;
+  padding:35px;
+  border-radius:35px;
+  box-shadow:0 10px 35px rgba(0,0,0,.08);
 }
 
-.card{
-    background:white;
-    padding:28px 15px;
-    border-radius:20px;
-    text-align:center;
-    box-shadow:0 8px 25px #0000000b;
+.result h3{
+  color:#6652d9;
+  font-size:34px;
+  margin-bottom:10px;
 }
 
-.card .icon{
-    font-size:40px;
-    margin-bottom:12px;
+.result p{
+  font-size:20px;
+  color:#777;
+  margin-bottom:25px;
 }
 
-.deals-section{
-    padding:20px 20px 70px;
-    max-width:1100px;
-    margin:auto;
+.shop{
+  padding:22px;
+  border-radius:22px;
+  background:#f3f4f8;
+  margin:15px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
 }
 
-.deals-subtitle{
-    text-align:center;
-    color:#64748b;
-    margin-bottom:30px;
+.shop.best{
+  background:#dff8e8;
+  border:3px solid #35b66b;
 }
 
-.deal-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
+.shop-name{
+  font-size:21px;
 }
 
-.deal-card{
-    background:white;
-    padding:28px 20px;
-    border-radius:22px;
-    text-align:center;
-    box-shadow:0 8px 25px #0000000b;
-    transition:.2s;
+.price{
+  font-size:24px;
+  font-weight:bold;
 }
 
-.deal-card:hover{
-    transform:translateY(-5px);
+.deal{
+  display:block;
+  text-decoration:none;
+  background:#6d55e8;
+  color:white;
+  padding:13px 25px;
+  border-radius:15px;
+  font-weight:bold;
 }
 
-.deal-icon{
-    font-size:55px;
-    margin-bottom:15px;
+.best-text{
+  color:#159447;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:25px;
 }
 
-.deal-card h3{
-    margin-bottom:8px;
-}
-
-.deal-card p{
-    color:#64748b;
-    font-size:14px;
-}
-
-.deal-card strong{
-    display:block;
-    font-size:25px;
-    margin:10px 0;
-}
-
-.deal-card span{
-    display:inline-block;
-    background:#ecfdf5;
-    color:#059669;
-    padding:7px 12px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
+.empty{
+  text-align:center;
+  color:#777;
+  font-size:20px;
 }
 
 footer{
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:30px;
-}
-
-footer span{
-    color:#60a5fa;
+  text-align:center;
+  padding:50px 20px;
+  color:#777;
+  font-size:18px;
 }
 
 @media(max-width:600px){
+  .hero h1{
+    font-size:34px;
+  }
 
-    nav{
-        display:none;
-    }
+  .hero p{
+    font-size:18px;
+  }
 
-    .hero h1{
-        font-size:42px;
-    }
+  .search-box{
+    padding:7px;
+  }
 
-    .search-box{
-        flex-direction:column;
-        gap:8px;
-    }
+  .search-box input{
+    font-size:17px;
+  }
 
-    .search-box button{
-        height:52px;
-    }
+  .search-box button{
+    padding:0 20px;
+  }
 
-    .upload-area{
-        flex-direction:column;
-        align-items:center;
-    }
+  h2{
+    font-size:30px;
+  }
 
-    .upload-btn,
-    .link-btn{
-        width:90%;
-    }
+  .result{
+    padding:25px;
+  }
 
-    .cards,
-    .deal-grid{
-        grid-template-columns:1fr 1fr;
-    }
+  .shop{
+    display:block;
+  }
 
-    .store{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
+  .price{
+    margin:10px 0;
+  }
 
-    .product-info{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .visual{
-        width:65px;
-        height:65px;
-        font-size:30px;
-    }
+  .deal{
+    display:inline-block;
+  }
 }
-
 </style>
-
 </head>
 
 <body>
 
-<header>
-
-<div class="logo">
-PRICE <span>MITRA</span>
-</div>
-
-<nav>
-<a href="#">Home</a>
-<a href="#categories">Categories</a>
-<a href="#results">Compare</a>
-</nav>
-
-</header>
-
-
 <section class="hero">
+  <h1>💜 Price Mitra</h1>
+  <p>Compare prices. Find the best deal.</p>
 
-<div class="visual v1">🛒</div>
-<div class="visual v2">📦</div>
-<div class="visual v3">🎧</div>
-<div class="visual v4">📱</div>
-<div class="visual v5">👟</div>
-<div class="visual v6">🏷️</div>
-
-<div class="hero-content">
-
-<div class="small-text">
-SMART SHOPPING STARTS HERE
-</div>
-
-<h1>
-Find the <span>Best Price.</span>
-<br>
-Buy Smart.
-</h1>
-
-<p>
-Compare prices from different shopping platforms
-and find the best deal.
-</p>
-
-<div class="search-box">
-
-<input
-id="searchInput"
-type="text"
-placeholder="Search product or paste product link..."
->
-
-<button onclick="compareProduct()">
-Compare Prices
-</button>
-
-</div>
-
-<div class="upload-area">
-
-<label class="upload-btn" for="photoInput">
-📷 Upload Product Photo
-</label>
-
-<input
-id="photoInput"
-type="file"
-accept="image/*"
-onchange="photoSelected(event)"
->
-
-<button class="link-btn" onclick="focusSearch()">
-🔗 Paste Product Link
-</button>
-
-</div>
-
-<div class="photo-name" id="photoName"></div>
-
-</div>
-
+  <div class="search-box">
+    <input id="searchInput" type="text" placeholder="Search product...">
+    <button onclick="searchProduct()">Search</button>
+  </div>
 </section>
 
+<div class="container">
 
-<section class="result-section" id="results">
+  <h2>Popular Categories</h2>
 
-<div class="result-title">
+  <div class="categories">
+    <div class="category">📱 Mobiles</div>
+    <div class="category">💻 Laptops</div>
+    <div class="category">🎧 Headphones</div>
+  </div>
 
-<h2>Price Comparison</h2>
+  <h2>Search Result</h2>
 
-<p>
-Compare prices and find the lowest deal
-</p>
-
-</div>
-
-<div class="product-card">
-
-<div class="product-info">
-
-<div class="product-image" id="productImage">
-🎧
-</div>
-
-<div>
-
-<h3 id="productName">
-Product
-</h3>
-
-<p>
-Prices from multiple shopping platforms
-</p>
+  <div id="result">
+    <div class="empty">
+      Search for a product to compare prices.
+    </div>
+  </div>
 
 </div>
-
-</div>
-
-<div class="store">
-
-<div class="store-name">
-🛒 Amazon
-</div>
-
-<div class="store-price">
-₹1,499
-</div>
-
-<button class="deal">
-View Deal
-</button>
-
-</div>
-
-<div class="store">
-
-<div class="store-name">
-🛍️ Flipkart
-</div>
-
-<div class="store-price">
-₹1,399
-</div>
-
-<button class="deal">
-View Deal
-</button>
-
-</div>
-
-<div class="store best">
-
-<div class="store-name">
-
-🏷️ Meesho
-
-<span class="best-label">
-BEST PRICE
-</span>
-
-</div>
-
-<div class="store-price">
-₹1,299
-</div>
-
-<button class="deal">
-View Deal
-</button>
-
-</div>
-
-<div class="save-box">
-
-🏆 You can save
-<strong>₹200</strong>
-by choosing the best price!
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="categories" id="categories">
-
-<h2>
-Shop by Category
-</h2>
-
-<div class="cards">
-
-<div class="card">
-<div class="icon">📱</div>
-<b>Mobiles</b>
-</div>
-
-<div class="card">
-<div class="icon">💻</div>
-<b>Laptops</b>
-</div>
-
-<div class="card">
-<div class="icon">🎧</div>
-<b>Audio</b>
-</div>
-
-<div class="card">
-<div class="icon">👟</div>
-<b>Fashion</b>
-</div>
-
-<div class="card">
-<div class="icon">🏠</div>
-<b>Home</b>
-</div>
-
-<div class="card">
-<div class="icon">⌚</div>
-<b>Gadgets</b>
-</div>
-
-</div>
-
-</section>
-
-
-<section class="deals-section">
-
-<h2>
-🔥 Popular Deals
-</h2>
-
-<p class="deals-subtitle">
-Check out some popular products and their prices
-</p>
-
-<div class="deal-grid">
-
-<div class="deal-card">
-
-<div class="deal-icon">
-📱
-</div>
-
-<h3>
-Smartphone
-</h3>
-
-<p>
-Starting from
-</p>
-
-<strong>
-₹12,999
-</strong>
-
-<span>
-🏷️ Lowest Price
-</span>
-
-</div>
-
-
-<div class="deal-card">
-
-<div class="deal-icon">
-🎧
-</div>
-
-<h3>
-Wireless Headphones
-</h3>
-
-<p>
-Starting from
-</p>
-
-<strong>
-₹999
-</strong>
-
-<span>
-🏷️ Lowest Price
-</span>
-
-</div>
-
-
-<div class="deal-card">
-
-<div class="deal-icon">
-⌚
-</div>
-
-<h3>
-Smart Watch
-</h3>
-
-<p>
-Starting from
-</p>
-
-<strong>
-₹1,499
-</strong>
-
-<span>
-🏷️ Lowest Price
-</span>
-
-</div>
-
-</div>
-
-</section>
-
 
 <footer>
-
-<h3>
-PRICE <span>MITRA</span>
-</h3>
-
-<p>
-Find the Best Price. Buy Smart.
-</p>
-
+  © 2026 Price Mitra • Compare Smart. Buy Smart.
 </footer>
-
 
 <script>
 
-function compareProduct(){
+function searchProduct(){
 
-let input =
-document.getElementById("searchInput").value.trim();
+  const product = document.getElementById("searchInput").value.trim();
 
-if(input === ""){
-return;
-}
+  if(product === ""){
+    document.getElementById("result").innerHTML =
+      '<div class="empty">Please enter a product name.</div>';
+    return;
+  }
 
-document.getElementById("productName").innerText = input;
+  const search = encodeURIComponent(product);
 
-document
-.getElementById("results")
-.classList.add("show");
+  const amazon =
+    "https://www.amazon.in/s?k=" + search;
 
-document
-.getElementById("results")
-.scrollIntoView({
-behavior:"smooth"
-});
+  const flipkart =
+    "https://www.flipkart.com/search?q=" + search;
 
-}
+  const meesho =
+    "https://www.meesho.com/search?q=" + search;
 
+  document.getElementById("result").innerHTML = `
 
-function focusSearch(){
+    <div class="result">
 
-document
-.getElementById("searchInput")
-.focus();
+      <h3>${product}</h3>
 
-}
+      <p>Price comparison</p>
 
+      <div class="shop">
+        <div class="shop-name">Amazon</div>
+        <a class="deal" href="${amazon}" target="_blank">
+          View Deal 🛒
+        </a>
+      </div>
 
-function photoSelected(event){
+      <div class="shop">
+        <div class="shop-name">Flipkart</div>
+        <a class="deal" href="${flipkart}" target="_blank">
+          View Deal 🛒
+        </a>
+      </div>
 
-let file = event.target.files[0];
+      <div class="shop best">
+        <div class="shop-name">🏆 Meesho</div>
+        <a class="deal" href="${meesho}" target="_blank">
+          View Deal 🛒
+        </a>
+      </div>
 
-if(!file){
-return;
-}
+      <div class="best-text">
+        🏆 Compare the prices and choose the best deal.
+      </div>
 
-document.getElementById("photoName").innerText =
-"📷 " + file.name;
+    </div>
 
-document.getElementById("photoName").style.display =
-"block";
-
-let reader = new FileReader();
-
-reader.onload = function(e){
-
-document.getElementById("productImage").innerHTML =
-'<img src="' + e.target.result + '">';
-
-};
-
-reader.readAsDataURL(file);
-
+  `;
 }
 
 </script>
