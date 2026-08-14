@@ -3,167 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Price Mitra</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:Arial,sans-serif;
-  background:#f5f6fa;
-  color:#172033;
+font-family:Arial,sans-serif;
+background:#f5f6fa;
+color:#172033;
 }
 
 header{
-  background:linear-gradient(135deg,#6c5ce7,#8e44ad);
-  color:white;
-  padding:40px 18px 55px;
-  text-align:center;
-  border-radius:0 0 35px 35px;
+background:linear-gradient(135deg,#6c5ce7,#8e44ad);
+color:white;
+padding:40px 18px 55px;
+text-align:center;
+border-radius:0 0 35px 35px;
 }
 
-.logo{
-  font-size:34px;
-  font-weight:bold;
-}
+.logo{font-size:34px;font-weight:bold}
 
 .tagline{
-  margin-top:8px;
-  font-size:18px;
+margin-top:8px;
+font-size:18px;
 }
 
 .search-box{
-  max-width:650px;
-  margin:28px auto 0;
-  display:flex;
-  background:white;
-  padding:6px;
-  border-radius:18px;
+max-width:650px;
+margin:28px auto 0;
+display:flex;
+background:white;
+padding:6px;
+border-radius:18px;
 }
 
 .search-box input{
-  flex:1;
-  border:0;
-  outline:0;
-  padding:15px;
-  font-size:17px;
-  min-width:0;
+flex:1;
+border:0;
+outline:0;
+padding:15px;
+font-size:17px;
+min-width:0;
 }
 
 .search-box button{
-  border:0;
-  background:#6c5ce7;
-  color:white;
-  padding:0 22px;
-  border-radius:13px;
-  font-size:17px;
-  font-weight:bold;
+border:0;
+background:#6c5ce7;
+color:white;
+padding:0 22px;
+border-radius:13px;
+font-size:17px;
+font-weight:bold;
 }
 
 .container{
-  max-width:950px;
-  margin:35px auto;
-  padding:0 18px;
+max-width:950px;
+margin:35px auto;
+padding:0 18px;
 }
 
 .title{
-  font-size:25px;
-  margin-bottom:20px;
+font-size:25px;
+margin-bottom:20px;
 }
 
 .categories{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  padding-bottom:10px;
+display:flex;
+gap:12px;
+overflow-x:auto;
+padding-bottom:10px;
 }
 
 .category{
-  background:white;
-  padding:15px 20px;
-  border-radius:15px;
-  white-space:nowrap;
-  box-shadow:0 4px 15px rgba(0,0,0,.07);
-  cursor:pointer;
+background:white;
+padding:15px 20px;
+border-radius:15px;
+white-space:nowrap;
+box-shadow:0 4px 15px rgba(0,0,0,.07);
 }
 
 .result{
-  margin-top:40px;
+margin-top:40px;
 }
 
 .empty{
-  text-align:center;
-  color:#777;
-  padding:25px;
+text-align:center;
+color:#777;
+padding:25px;
 }
 
 .product-card{
-  display:none;
-  background:white;
-  padding:24px;
-  border-radius:22px;
-  box-shadow:0 7px 25px rgba(0,0,0,.08);
+display:none;
+background:white;
+padding:24px;
+border-radius:22px;
+box-shadow:0 7px 25px rgba(0,0,0,.08);
 }
 
 .product-name{
-  color:#6c5ce7;
-  font-size:26px;
-  font-weight:bold;
+color:#6c5ce7;
+font-size:26px;
+font-weight:bold;
 }
 
 .subtitle{
-  color:#777;
-  margin-top:7px;
-  margin-bottom:22px;
+color:#777;
+margin-top:7px;
+margin-bottom:22px;
 }
 
 .shop{
-  background:#f5f6fa;
-  padding:18px;
-  border-radius:15px;
-  margin:12px 0;
+background:#f5f6fa;
+padding:18px;
+border-radius:15px;
+margin:12px 0;
 }
 
 .shop-name{
-  font-size:19px;
-  font-weight:bold;
+font-size:19px;
+font-weight:bold;
 }
 
 .view-btn{
-  display:inline-block;
-  margin-top:12px;
-  background:#6c5ce7;
-  color:white;
-  text-decoration:none;
-  padding:10px 17px;
-  border-radius:10px;
-  font-weight:bold;
+display:inline-block;
+margin-top:12px;
+background:#6c5ce7;
+color:white;
+text-decoration:none;
+padding:10px 17px;
+border-radius:10px;
+font-weight:bold;
 }
 
 footer{
-  text-align:center;
-  color:#777;
-  padding:40px 15px;
+text-align:center;
+color:#777;
+padding:40px 15px;
 }
 
 @media(max-width:600px){
-
-  .logo{
-    font-size:29px;
-  }
-
-  .search-box button{
-    padding:0 15px;
-  }
-
-  .product-card{
-    padding:20px;
-  }
+.logo{font-size:29px}
+.search-box button{padding:0 15px}
+.product-card{padding:20px}
 }
 </style>
 </head>
@@ -194,7 +176,6 @@ Search
 
 </header>
 
-
 <div class="container">
 
 <h2 class="title">
@@ -203,28 +184,13 @@ Popular Categories
 
 <div class="categories">
 
-<div class="category" onclick="quickSearch('mobile')">
-📱 Mobiles
-</div>
-
-<div class="category" onclick="quickSearch('laptop')">
-💻 Laptops
-</div>
-
-<div class="category" onclick="quickSearch('headphones')">
-🎧 Headphones
-</div>
-
-<div class="category" onclick="quickSearch('shoes')">
-👟 Shoes
-</div>
-
-<div class="category" onclick="quickSearch('watch')">
-⌚ Watches
-</div>
+<div class="category">📱 Mobiles</div>
+<div class="category">💻 Laptops</div>
+<div class="category">🎧 Headphones</div>
+<div class="category">👟 Shoes</div>
+<div class="category">⌚ Watches</div>
 
 </div>
-
 
 <div class="result">
 
@@ -241,7 +207,7 @@ Search for a product to compare prices.
 <div id="productName" class="product-name"></div>
 
 <div class="subtitle">
-Compare this product across shopping platforms
+Price comparison
 </div>
 
 <div id="shops"></div>
@@ -252,139 +218,111 @@ Compare this product across shopping platforms
 
 </div>
 
-
 <footer>
 © 2026 Price Mitra • Compare Smart. Buy Smart.
 </footer>
 
-
 <script>
 
-function searchProduct(){
+const API =
+"https://gentle-breeze-a7f9.sarkaterudra619.workers.dev";
 
-  const input =
-  document.getElementById("searchInput");
+async function searchProduct(){
 
-  const product =
-  input.value.trim();
+const input =
+document.getElementById("searchInput");
 
-  const card =
-  document.getElementById("productCard");
+const product =
+input.value.trim();
 
-  const empty =
-  document.getElementById("empty");
+const empty =
+document.getElementById("empty");
 
-  const name =
-  document.getElementById("productName");
+const card =
+document.getElementById("productCard");
 
-  const shops =
-  document.getElementById("shops");
+const name =
+document.getElementById("productName");
 
+const shops =
+document.getElementById("shops");
 
-  if(product === ""){
+if(product===""){
 
-    card.style.display="none";
+card.style.display="none";
 
-    empty.innerText=
-    "Please enter a product name.";
+empty.innerText=
+"Please enter a product name.";
 
-    return;
-
-  }
-
-
-  const q =
-  encodeURIComponent(product);
-
-
-  const platforms = [
-
-    {
-      name:"Amazon",
-      url:"https://www.amazon.in/s?k="+q
-    },
-
-    {
-      name:"Flipkart",
-      url:"https://www.flipkart.com/search?q="+q
-    },
-
-    {
-      name:"Meesho",
-      url:"https://www.meesho.com/search?q="+q
-    },
-
-    {
-      name:"Myntra",
-      url:"https://www.myntra.com/"+q
-    },
-
-    {
-      name:"AJIO",
-      url:"https://www.ajio.com/search/?text="+q
-    },
-
-    {
-      name:"Croma",
-      url:"https://www.croma.com/searchB?q="+q
-    },
-
-    {
-      name:"Reliance Digital",
-      url:"https://www.reliancedigital.in/search?q="+q
-    }
-
-  ];
-
-
-  name.innerText=product;
-
-  shops.innerHTML="";
-
-
-  platforms.forEach(function(platform){
-
-    const div =
-    document.createElement("div");
-
-    div.className="shop";
-
-    div.innerHTML=`
-
-      <div class="shop-name">
-      🛒 ${platform.name}
-      </div>
-
-      <a
-      class="view-btn"
-      href="${platform.url}"
-      target="_blank"
-      rel="noopener noreferrer"
-      >
-      View Deal 🔗
-      </a>
-
-    `;
-
-    shops.appendChild(div);
-
-  });
-
-
-  empty.innerText=
-  "Compare this product on 7 shopping platforms:";
-
-  card.style.display="block";
+return;
 
 }
 
+empty.innerText=
+"Searching...";
 
-function quickSearch(product){
+card.style.display="none";
 
-  document.getElementById("searchInput").value=
-  product;
+try{
 
-  searchProduct();
+const response =
+await fetch(
+API + "/api/search?q=" +
+encodeURIComponent(product)
+);
+
+const data =
+await response.json();
+
+name.innerText=
+data.product;
+
+shops.innerHTML="";
+
+data.results.forEach(function(item){
+
+const div =
+document.createElement("div");
+
+div.className="shop";
+
+div.innerHTML=`
+
+<div class="shop-name">
+🛒 ${item.store}
+</div>
+
+<div style="margin-top:8px;font-size:22px;font-weight:bold">
+₹${item.price.toLocaleString("en-IN")}
+</div>
+
+<a
+class="view-btn"
+href="${item.link}"
+target="_blank"
+rel="noopener noreferrer">
+View Deal 🔗
+</a>
+
+`;
+
+shops.appendChild(div);
+
+});
+
+empty.innerText=
+"Price comparison results:";
+
+card.style.display="block";
+
+}catch(error){
+
+card.style.display="none";
+
+empty.innerText=
+"Something went wrong. Please try again.";
+
+}
 
 }
 
