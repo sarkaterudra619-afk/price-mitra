@@ -6,7 +6,7 @@
 <title>Price Mitra</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
 font-family:Arial,sans-serif;
@@ -22,7 +22,10 @@ text-align:center;
 border-radius:0 0 35px 35px;
 }
 
-.logo{font-size:34px;font-weight:bold}
+.logo{
+font-size:36px;
+font-weight:bold;
+}
 
 .tagline{
 margin-top:8px;
@@ -44,7 +47,6 @@ border:0;
 outline:0;
 padding:15px;
 font-size:17px;
-min-width:0;
 }
 
 .search-box button{
@@ -103,14 +105,13 @@ box-shadow:0 7px 25px rgba(0,0,0,.08);
 
 .product-name{
 color:#6c5ce7;
-font-size:26px;
+font-size:28px;
 font-weight:bold;
 }
 
 .subtitle{
 color:#777;
-margin-top:7px;
-margin-bottom:22px;
+margin:8px 0 22px;
 }
 
 .shop{
@@ -125,6 +126,12 @@ font-size:19px;
 font-weight:bold;
 }
 
+.price{
+font-size:23px;
+font-weight:bold;
+margin-top:8px;
+}
+
 .view-btn{
 display:inline-block;
 margin-top:12px;
@@ -136,6 +143,11 @@ border-radius:10px;
 font-weight:bold;
 }
 
+.best{
+border:2px solid #35b66b;
+background:#e9fff1;
+}
+
 footer{
 text-align:center;
 color:#777;
@@ -143,7 +155,7 @@ padding:40px 15px;
 }
 
 @media(max-width:600px){
-.logo{font-size:29px}
+.logo{font-size:30px}
 .search-box button{padding:0 15px}
 .product-card{padding:20px}
 }
@@ -176,27 +188,23 @@ Search
 
 </header>
 
+
 <div class="container">
 
-<h2 class="title">
-Popular Categories
-</h2>
+<h2 class="title">Popular Categories</h2>
 
 <div class="categories">
-
 <div class="category">📱 Mobiles</div>
 <div class="category">💻 Laptops</div>
 <div class="category">🎧 Headphones</div>
 <div class="category">👟 Shoes</div>
 <div class="category">⌚ Watches</div>
-
 </div>
+
 
 <div class="result">
 
-<h2 class="title">
-Search Result
-</h2>
+<h2 class="title">Search Result</h2>
 
 <div id="empty" class="empty">
 Search for a product to compare prices.
@@ -207,7 +215,7 @@ Search for a product to compare prices.
 <div id="productName" class="product-name"></div>
 
 <div class="subtitle">
-Price comparison
+Compare prices across shopping platforms
 </div>
 
 <div id="shops"></div>
@@ -218,9 +226,11 @@ Price comparison
 
 </div>
 
+
 <footer>
 © 2026 Price Mitra • Compare Smart. Buy Smart.
 </footer>
+
 
 <script>
 
@@ -229,11 +239,8 @@ const API =
 
 async function searchProduct(){
 
-const input =
-document.getElementById("searchInput");
-
 const product =
-input.value.trim();
+document.getElementById("searchInput").value.trim();
 
 const empty =
 document.getElementById("empty");
@@ -247,7 +254,7 @@ document.getElementById("productName");
 const shops =
 document.getElementById("shops");
 
-if(product===""){
+if(!product){
 
 card.style.display="none";
 
@@ -258,8 +265,7 @@ return;
 
 }
 
-empty.innerText=
-"Searching...";
+empty.innerText="Searching...";
 
 card.style.display="none";
 
@@ -271,20 +277,27 @@ API + "/api/search?q=" +
 encodeURIComponent(product)
 );
 
+if(!response.ok){
+throw new Error("API error");
+}
+
 const data =
 await response.json();
 
-name.innerText=
-data.product;
+name.innerText=data.product;
 
 shops.innerHTML="";
 
-data.results.forEach(function(item){
+data.results.forEach(function(item,index){
 
 const div =
 document.createElement("div");
 
-div.className="shop";
+div.className =
+index === 2 ? "shop best" : "shop";
+
+const price =
+Number(item.price).toLocaleString("en-IN");
 
 div.innerHTML=`
 
@@ -292,13 +305,13 @@ div.innerHTML=`
 🛒 ${item.store}
 </div>
 
-<div style="margin-top:8px;font-size:22px;font-weight:bold">
-₹${item.price.toLocaleString("en-IN")}
+<div class="price">
+₹${price}
 </div>
 
 <a
 class="view-btn"
-href="${item.link}"
+href="${item.link || '#'}"
 target="_blank"
 rel="noopener noreferrer">
 View Deal 🔗
@@ -320,7 +333,7 @@ card.style.display="block";
 card.style.display="none";
 
 empty.innerText=
-"Something went wrong. Please try again.";
+"Unable to load prices. Please try again.";
 
 }
 
