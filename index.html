@@ -1,162 +1,151 @@
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+
+    const data = {
+      product: "iPhone 16",
+      results: [
+        { store: "Amazon", price: 69999 },
+        { store: "Flipkart", price: 67499 },
+        { store: "Meesho", price: 64999 },
+        { store: "Myntra", price: 65999 },
+        { store: "AJIO", price: 67999 },
+        { store: "Croma", price: 68999 },
+        { store: "Reliance Digital", price: 67999 }
+      ]
+    };
+
+    // API
+    if (url.pathname === "/api") {
+      return new Response(JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
+      });
+    }
+
+    // Website
+    const cards = data.results.map(item => `
+      <div class="card">
+        <h2>🛒 ${item.store}</h2>
+        <p class="price">₹${item.price.toLocaleString("en-IN")}</p>
+        <button>View Deal 🔗</button>
+      </div>
+    `).join("");
+
+    const html = `
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Price Mitra</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f5f6fa;
-  color:#172033;
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #f4f4fa;
+  color: #17213c;
 }
 
-.container{
-  max-width:700px;
-  margin:auto;
-  padding:30px 18px;
+.header {
+  text-align: center;
+  padding: 35px 15px 20px;
 }
 
-h1{
-  text-align:center;
-  color:#6547e8;
-  font-size:38px;
+.header h1 {
+  color: #684de5;
+  font-size: 42px;
+  margin: 0;
 }
 
-.subtitle{
-  text-align:center;
-  font-size:20px;
-  color:#666;
-  margin-bottom:30px;
+.header p {
+  font-size: 20px;
+  color: #666;
 }
 
-.product{
-  background:white;
-  border-radius:28px;
-  padding:25px;
-  box-shadow:0 10px 30px #00000012;
+.container {
+  max-width: 650px;
+  margin: auto;
+  padding: 15px;
 }
 
-.platform{
-  background:#f4f5fa;
-  border-radius:24px;
-  padding:25px;
-  margin:20px 0;
+.product {
+  background: white;
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 8px 25px #ddd;
 }
 
-.platform h2{
-  margin:0 0 15px;
-  font-size:28px;
+.product h2 {
+  font-size: 32px;
+  color: #684de5;
 }
 
-.price{
-  font-size:25px;
-  font-weight:bold;
-  color:#19a463;
-  margin-bottom:15px;
+.card {
+  background: #f7f7fb;
+  border-radius: 22px;
+  padding: 22px;
+  margin: 18px 0;
 }
 
-button{
-  background:#684de8;
-  color:white;
-  border:0;
-  border-radius:14px;
-  padding:14px 25px;
-  font-size:18px;
-  font-weight:bold;
+.card h2 {
+  font-size: 25px;
+  margin: 0 0 12px;
 }
 
-footer{
-  text-align:center;
-  color:#777;
-  margin-top:40px;
+.price {
+  font-size: 28px;
+  font-weight: bold;
+  color: #111;
+}
+
+button {
+  background: #684de5;
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 25px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.footer {
+  text-align: center;
+  padding: 35px 10px;
+  color: #777;
 }
 </style>
 </head>
 
 <body>
 
+<div class="header">
+  <h1>Price Mitra</h1>
+  <p>Compare prices. Buy smart.</p>
+</div>
+
 <div class="container">
-
-<h1>Price Mitra</h1>
-
-<div class="subtitle">
-Compare this product across shopping platforms
+  <div class="product">
+    <h2>📱 ${data.product}</h2>
+    <p>Compare this product across shopping platforms</p>
+    ${cards}
+  </div>
 </div>
 
-<div class="product">
-
-<h2>iPhone 16</h2>
-
-<div id="results">
-Loading prices...
+<div class="footer">
+  © 2026 Price Mitra • Compare Smart. Buy Smart.
 </div>
-
-</div>
-
-<footer>
-© 2026 Price Mitra • Compare Smart. Buy Smart.
-</footer>
-
-</div>
-
-<script>
-
-const API_URL =
-"https://gentle-breeze-a7f9.sarkaterudra619.workers.dev";
-
-async function loadPrices(){
-
-  try{
-
-    const response = await fetch(API_URL);
-
-    const data = await response.json();
-
-    const results = document.getElementById("results");
-
-    results.innerHTML = "";
-
-    data.results.forEach(item => {
-
-      const card = document.createElement("div");
-
-      card.className = "platform";
-
-      card.innerHTML = `
-        <h2>🛒 ${item.store}</h2>
-
-        <div class="price">
-          ₹${Number(item.price).toLocaleString("en-IN")}
-        </div>
-
-        <button onclick="alert('${item.store} deal')">
-          View Deal 🔗
-        </button>
-      `;
-
-      results.appendChild(card);
-
-    });
-
-  }catch(error){
-
-    document.getElementById("results").innerHTML =
-      "<p>Price load होत नाहीये. पुन्हा try करा.</p>";
-
-    console.log(error);
-
-  }
-
-}
-
-loadPrices();
-
-</script>
 
 </body>
 </html>
+`;
+
+    return new Response(html, {
+      headers: {
+        "Content-Type": "text/html;charset=UTF-8"
+      }
+    });
+  }
+};
